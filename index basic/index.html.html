@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Basics Learning Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #f8fafc; color: #334155; }
+        .eng-font { font-family: 'Fredoka', sans-serif; }
+        
+        /* Animations */
+        .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+        .animate-slide-up { animation: slideUp 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Card Hover Effects */
+        .topic-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .topic-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        /* Highlight words */
+        .hl-sub { color: #2563eb; font-weight: bold; } /* Subject: Blue */
+        .hl-v { color: #dc2626; font-weight: bold; }   /* Verb: Red */
+        .hl-obj { color: #059669; font-weight: bold; } /* Object: Green */
+        .hl-adj { color: #9333ea; font-weight: bold; } /* Adjective: Purple */
+        .hl-hl { background-color: #fef08a; padding: 0 4px; border-radius: 4px; color: #b45309; } /* Highlight yellow */
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-10 px-4 md:px-8">
+
+    <!-- HEADER -->
+    <header class="w-full max-w-5xl mb-10 text-center relative">
+        <div class="inline-block bg-indigo-100 text-indigo-800 px-4 py-1 rounded-full text-sm font-bold mb-3 tracking-wide border border-indigo-200">
+            <i class="fas fa-book-open mr-2"></i>Interactive Lesson
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-800 tracking-tight mb-2">
+            พื้นฐานภาษาอังกฤษ
+        </h1>
+        <p class="text-slate-500 text-lg md:text-xl font-medium eng-font">(English Basics)</p>
+        
+        <!-- Back Button (Hidden on Home) -->
+        <button id="back-btn" onclick="goHome()" class="hidden absolute left-0 top-1/2 -translate-y-1/2 bg-white hover:bg-slate-100 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm border border-slate-200 transition">
+            <i class="fas fa-arrow-left mr-2"></i> กลับหน้าหลัก
+        </button>
+    </header>
+
+    <!-- SCREEN 1: HOME (Mind Map Main Branches) -->
+    <main id="home-screen" class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 animate-fade-in">
+        
+        <!-- Topic 1 -->
+        <div onclick="openLesson('simple')" class="topic-card bg-white rounded-3xl p-8 border-t-8 border-blue-500 shadow-lg cursor-pointer flex flex-col items-center text-center group">
+            <div class="w-20 h-20 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Simple Sentence</h2>
+            <p class="text-slate-500 font-medium mb-4">ประโยคบอกเล่า</p>
+            <div class="flex flex-wrap justify-center gap-2 mt-auto">
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>โครงสร้างหลัก</span>
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>I, You, We, They</span>
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>He, She, It</span>
+            </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div onclick="openLesson('adj')" class="topic-card bg-white rounded-3xl p-8 border-t-8 border-purple-500 shadow-lg cursor-pointer flex flex-col items-center text-center group">
+            <div class="w-20 h-20 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-magic"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Adjectives</h2>
+            <p class="text-slate-500 font-medium mb-4">คำคุณศัพท์</p>
+            <div class="flex flex-wrap justify-center gap-2 mt-auto">
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>หน้าที่</span>
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>ตำแหน่งการวาง</span>
+            </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div onclick="openLesson('neg')" class="topic-card bg-white rounded-3xl p-8 border-t-8 border-red-500 shadow-lg cursor-pointer flex flex-col items-center text-center group">
+            <div class="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-ban"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Negative</h2>
+            <p class="text-slate-500 font-medium mb-4">ประโยคปฏิเสธ</p>
+            <div class="flex flex-wrap justify-center gap-2 mt-auto">
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>กริยาช่วย don't/doesn't</span>
+                <span class="bg-amber-100 text-amber-700 font-bold text-xs px-3 py-1 rounded-full"><i class="fas fa-star mr-1"></i>กฎเหล็ก!</span>
+            </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div onclick="openLesson('ques')" class="topic-card bg-white rounded-3xl p-8 border-t-8 border-orange-500 shadow-lg cursor-pointer flex flex-col items-center text-center group">
+            <div class="w-20 h-20 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-question"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Question</h2>
+            <p class="text-slate-500 font-medium mb-4">ประโยคคำถาม</p>
+            <div class="flex flex-wrap justify-center gap-2 mt-auto">
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>โครงสร้าง Do/Does</span>
+                <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full"><i class="fas fa-caret-right mr-1"></i>การตอบ</span>
+                <span class="bg-amber-100 text-amber-700 font-bold text-xs px-3 py-1 rounded-full"><i class="fas fa-star mr-1"></i>กฎเหล็ก!</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCREEN 2: LESSON DETAIL -->
+    <main id="lesson-screen" class="hidden w-full max-w-4xl pb-20">
+        <!-- Content will be injected here via JS -->
+    </main>
+
+    <script>
+        // --- CONTENT DATABASE (Based on the Mind Map) ---
+        const lessonData = {
+            'simple': {
+                title: "Simple Sentence",
+                subtitle: "ประโยคบอกเล่าพื้นฐาน",
+                theme: "blue",
+                icon: "fa-comment-dots",
+                content: `
+                    <!-- Sub 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.1s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-cubes text-blue-500 mr-2"></i> โครงสร้างหลัก (Main Structure)
+                        </h3>
+                        <p class="text-slate-600 mb-4">ประโยคพื้นฐานในภาษาอังกฤษประกอบด้วย 3 ส่วนหลัก คือ</p>
+                        
+                        <div class="flex justify-center gap-2 md:gap-6 mb-6">
+                            <div class="bg-blue-50 border-2 border-blue-200 p-3 rounded-xl text-center flex-1">
+                                <div class="font-bold text-blue-700 text-lg">Subject</div>
+                                <div class="text-sm text-slate-500">ประธาน (ผู้กระทำ)</div>
+                            </div>
+                            <div class="text-2xl text-slate-300 self-center">+</div>
+                            <div class="bg-red-50 border-2 border-red-200 p-3 rounded-xl text-center flex-1">
+                                <div class="font-bold text-red-700 text-lg">Verb</div>
+                                <div class="text-sm text-slate-500">กริยา (การกระทำ)</div>
+                            </div>
+                            <div class="text-2xl text-slate-300 self-center">+</div>
+                            <div class="bg-green-50 border-2 border-green-200 p-3 rounded-xl text-center flex-1">
+                                <div class="font-bold text-green-700 text-lg">Object</div>
+                                <div class="text-sm text-slate-500">กรรม (ผู้ถูกกระทำ)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <div class="text-sm text-slate-500 mb-1">ตัวอย่าง:</div>
+                            <div class="eng-font text-2xl"><span class="hl-sub">I</span> <span class="hl-v">eat</span> <span class="hl-obj">an apple.</span></div>
+                            <div class="text-slate-600 mt-1">ฉัน กิน แอปเปิ้ล</div>
+                        </div>
+                    </div>
+
+                    <!-- Sub 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.2s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-users text-blue-500 mr-2"></i> กลุ่มประธาน I, You, We, They
+                        </h3>
+                        <p class="text-slate-600 mb-4">กลุ่มนี้คือ "ประธานพหูพจน์" (มีหลายคน) รวมตัว I และ You เข้าไปด้วย <br>
+                        <strong class="text-red-500">กฎ:</strong> คำกริยา (Verb) <u>ไม่ต้องเติม s/es</u> ที่ท้ายคำ</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-slate-200 p-4 rounded-lg">
+                                <div class="eng-font text-xl"><span class="hl-sub">They</span> <span class="hl-v">play</span> football.</div>
+                                <div class="text-slate-500 text-sm">พวกเขาเล่นฟุตบอล <span class="text-red-500 text-xs ml-2">(play ไม่เติม s)</span></div>
+                            </div>
+                            <div class="border border-slate-200 p-4 rounded-lg">
+                                <div class="eng-font text-xl"><span class="hl-sub">We</span> <span class="hl-v">go</span> to school.</div>
+                                <div class="text-slate-500 text-sm">พวกเราไปโรงเรียน <span class="text-red-500 text-xs ml-2">(go ไม่เติม es)</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.3s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-user text-blue-500 mr-2"></i> กลุ่มประธาน He, She, It
+                        </h3>
+                        <p class="text-slate-600 mb-4">กลุ่มนี้คือ "ประธานเอกพจน์" (มีแค่คนเดียว ตัวเดียว หรือสิ่งเดียว) <br>
+                        <strong class="text-red-500">กฎ:</strong> คำกริยา (Verb) <u class="hl-hl">ต้องเติม s หรือ es</u> ที่ท้ายคำเสมอ!</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-slate-200 p-4 rounded-lg">
+                                <div class="eng-font text-xl"><span class="hl-sub">He</span> <span class="hl-v">plays</span> football.</div>
+                                <div class="text-slate-500 text-sm">เขาเล่นฟุตบอล <span class="text-red-500 text-xs ml-2 font-bold">(ต้องเติม s)</span></div>
+                            </div>
+                            <div class="border border-slate-200 p-4 rounded-lg">
+                                <div class="eng-font text-xl"><span class="hl-sub">She</span> <span class="hl-v">goes</span> to school.</div>
+                                <div class="text-slate-500 text-sm">เธอไปโรงเรียน <span class="text-red-500 text-xs ml-2 font-bold">(ต้องเติม es)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'adj': {
+                title: "Adjectives",
+                subtitle: "คำคุณศัพท์",
+                theme: "purple",
+                icon: "fa-magic",
+                content: `
+                    <!-- Sub 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.1s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-paint-brush text-purple-500 mr-2"></i> หน้าที่
+                        </h3>
+                        <p class="text-slate-600 mb-4">คำคุณศัพท์ (Adjective) ทำหน้าที่ <strong>"ขยายคำนาม (Noun)"</strong> เพื่อบอกให้รู้ลักษณะ รูปร่าง สี ขนาด หรือความรู้สึก ทำให้เราเห็นภาพชัดเจนขึ้น</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm eng-font">red (สีแดง)</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm eng-font">big (ใหญ่)</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm eng-font">beautiful (สวย)</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm eng-font">happy (มีความสุข)</span>
+                        </div>
+                    </div>
+
+                    <!-- Sub 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.2s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-map-marker-alt text-purple-500 mr-2"></i> ตำแหน่งการวาง
+                        </h3>
+                        <p class="text-slate-600 mb-4">ในภาษาอังกฤษ เรามักจะวางคำคุณศัพท์ไว้ 2 ที่หลักๆ คือ:</p>
+                        
+                        <div class="space-y-4">
+                            <!-- Position 1 -->
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-purple-400">
+                                <div class="font-bold text-slate-800 mb-2">1. วาง "หน้า" คำนาม (Noun)</div>
+                                <div class="text-slate-500 text-sm mb-2">เพื่อบอกว่าของสิ่งนั้นมีลักษณะอย่างไร (ภาษาไทยจะวางไว้ข้างหลัง แต่ภาษาอังกฤษวางข้างหน้า!)</div>
+                                <div class="bg-white p-3 rounded border border-slate-200">
+                                    <div class="eng-font text-xl">A <span class="hl-adj">red</span> car.</div>
+                                    <div class="text-slate-600 text-sm">รถ(ที่มีสีแดง) -> รถสีแดง</div>
+                                </div>
+                            </div>
+
+                            <!-- Position 2 -->
+                            <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-purple-400">
+                                <div class="font-bold text-slate-800 mb-2">2. วาง "หลัง" Verb to be (is, am, are)</div>
+                                <div class="text-slate-500 text-sm mb-2">เพื่ออธิบายประธานของประโยค</div>
+                                <div class="bg-white p-3 rounded border border-slate-200">
+                                    <div class="eng-font text-xl">The car <span class="hl-v">is</span> <span class="hl-adj">red</span>.</div>
+                                    <div class="text-slate-600 text-sm">รถคันนั้น(คือ)สีแดง</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'neg': {
+                title: "Negative",
+                subtitle: "ประโยคปฏิเสธ",
+                theme: "red",
+                icon: "fa-ban",
+                content: `
+                    <!-- Sub 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.1s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-hand-paper text-red-500 mr-2"></i> กริยาช่วย don't / doesn't
+                        </h3>
+                        <p class="text-slate-600 mb-4">การทำประโยคบอกเล่าให้เป็นประโยคปฏิเสธ (บอกว่า "ไม่") เราต้องเอา <strong>Verb to do</strong> เข้ามาช่วย แล้วเติม <strong>not</strong> ต่อท้าย</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <!-- Group 1 -->
+                            <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                                <div class="font-bold text-red-800 mb-2 eng-font">I, You, We, They</div>
+                                <div class="text-slate-700">ใช้ <strong>do not</strong> (ย่อว่า <span class="font-bold eng-font text-red-600">don't</span>)</div>
+                            </div>
+                            <!-- Group 2 -->
+                            <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                                <div class="font-bold text-red-800 mb-2 eng-font">He, She, It</div>
+                                <div class="text-slate-700">ใช้ <strong>does not</strong> (ย่อว่า <span class="font-bold eng-font text-red-600">doesn't</span>)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub 2 (Golden Rule) -->
+                    <div class="bg-amber-50 rounded-2xl shadow-sm border-2 border-amber-300 p-6 mb-6 animate-slide-up relative overflow-hidden" style="animation-delay: 0.2s; animation-fill-mode: both;">
+                        <div class="absolute -right-4 -top-4 text-8xl text-amber-200 opacity-50"><i class="fas fa-star"></i></div>
+                        
+                        <h3 class="text-xl font-bold text-amber-800 mb-4 border-b border-amber-200 pb-2 relative z-10">
+                            <i class="fas fa-exclamation-triangle text-amber-600 mr-2"></i> กฎเหล็ก (Golden Rule!)
+                        </h3>
+                        
+                        <p class="text-slate-700 mb-4 font-medium relative z-10 text-lg">
+                            เมื่อมี <span class="eng-font font-bold text-red-600">don't / doesn't</span> เข้ามาช่วยในประโยคแล้ว<br>
+                            กริยาแท้ (Verb) ที่ตามมา <strong><u class="hl-hl">ห้ามเติม s หรือ es เด็ดขาด!</u></strong> (ต้องกลับคืนร่างเดิม)
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                            <!-- Right Example -->
+                            <div class="bg-white p-4 rounded-lg border border-slate-200">
+                                <div class="flex items-center text-green-600 font-bold mb-1"><i class="fas fa-check-circle mr-2"></i> ถูกต้อง</div>
+                                <div class="eng-font text-lg"><span class="hl-sub">He</span> <span class="font-bold text-red-600">doesn't</span> <span class="hl-v">play</span> games.</div>
+                                <div class="text-sm text-slate-500 mt-1">เขาไม่เล่นเกม (play กลับร่างเดิม ไม่เติม s)</div>
+                            </div>
+                            <!-- Wrong Example -->
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 opacity-70">
+                                <div class="flex items-center text-red-500 font-bold mb-1"><i class="fas fa-times-circle mr-2"></i> ผิด</div>
+                                <div class="eng-font text-lg line-through text-slate-400"><span class="hl-sub">He</span> <span class="font-bold text-red-400">doesn't</span> <span class="hl-v text-red-400">plays</span> games.</div>
+                                <div class="text-sm text-slate-500 mt-1">(มี doesn't แล้ว ห้ามเติม s ที่ play อีก)</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'ques': {
+                title: "Question",
+                subtitle: "ประโยคคำถาม",
+                theme: "orange",
+                icon: "fa-question",
+                content: `
+                    <!-- Sub 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.1s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-exchange-alt text-orange-500 mr-2"></i> โครงสร้าง Do / Does
+                        </h3>
+                        <p class="text-slate-600 mb-4">การทำเป็นประโยคคำถามที่ตอบ Yes/No ให้เอา <strong>Do</strong> หรือ <strong>Does</strong> มาวางไว้ <u class="font-bold">หน้าสุดของประโยค</u></p>
+                        
+                        <div class="flex justify-center mb-6">
+                            <div class="bg-slate-800 text-white eng-font font-bold text-xl px-6 py-3 rounded-full shadow-md">
+                                Do / Does + Subject + Verb + Object ?
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-slate-200 p-4 rounded-lg bg-orange-50">
+                                <div class="eng-font text-xl"><span class="font-bold text-orange-600">Do</span> <span class="hl-sub">you</span> <span class="hl-v">like</span> pizza?</div>
+                                <div class="text-slate-500 text-sm">คุณชอบพิซซ่าไหม? (ประธาน You ใช้ Do)</div>
+                            </div>
+                            <div class="border border-slate-200 p-4 rounded-lg bg-orange-50">
+                                <div class="eng-font text-xl"><span class="font-bold text-orange-600">Does</span> <span class="hl-sub">she</span> <span class="hl-v">cook</span>?</div>
+                                <div class="text-slate-500 text-sm">เธอทำอาหารไหม? (ประธาน She ใช้ Does)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 animate-slide-up" style="animation-delay: 0.2s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">
+                            <i class="fas fa-comment text-orange-500 mr-2"></i> การตอบ (Answering)
+                        </h3>
+                        <p class="text-slate-600 mb-4">ถามด้วยกริยาช่วยตัวไหน ให้ตอบด้วยกริยาช่วยตัวนั้น (ถาม Do ตอบ do, ถาม Does ตอบ does)</p>
+                        
+                        <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-lg mx-auto eng-font text-lg">
+                            <!-- Yes/No Do -->
+                            <div class="bg-green-100 text-green-800 px-4 py-2 rounded-t-lg font-bold text-center">ถามด้วย Do</div>
+                            <div class="bg-green-100 text-green-800 px-4 py-2 rounded-t-lg font-bold text-center">ถามด้วย Does</div>
+                            
+                            <div class="border border-slate-200 p-3 text-center">Yes, I <strong>do</strong>.</div>
+                            <div class="border border-slate-200 p-3 text-center">Yes, he <strong>does</strong>.</div>
+                            
+                            <div class="border border-slate-200 p-3 text-center rounded-b-lg">No, I <strong>don't</strong>.</div>
+                            <div class="border border-slate-200 p-3 text-center rounded-b-lg">No, she <strong>doesn't</strong>.</div>
+                        </div>
+                    </div>
+
+                    <!-- Sub 3 (Golden Rule) -->
+                    <div class="bg-amber-50 rounded-2xl shadow-sm border-2 border-amber-300 p-6 mb-6 animate-slide-up relative overflow-hidden" style="animation-delay: 0.3s; animation-fill-mode: both;">
+                        <h3 class="text-xl font-bold text-amber-800 mb-4 border-b border-amber-200 pb-2 relative z-10">
+                            <i class="fas fa-exclamation-triangle text-amber-600 mr-2"></i> กฎเหล็ก (Golden Rule!)
+                        </h3>
+                        <p class="text-slate-700 mb-4 font-medium relative z-10 text-lg">
+                            เหมือนกับประโยคปฏิเสธเป๊ะ! เมื่อประโยคมีคำว่า <span class="eng-font font-bold text-orange-600">Do / Does</span> อยู่ข้างหน้าแล้ว<br>
+                            กริยาแท้ (Verb) <strong><u class="hl-hl">ห้ามเติม s หรือ es เด็ดขาด!</u></strong>
+                        </p>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 inline-block">
+                            <div class="flex items-center text-green-600 font-bold mb-1"><i class="fas fa-check-circle mr-2"></i> ถูกต้อง</div>
+                            <div class="eng-font text-xl"><span class="font-bold text-orange-600">Does</span> <span class="hl-sub">he</span> <span class="hl-v">run</span> fast?</div>
+                            <div class="text-sm text-slate-500 mt-1">(run ต้องไม่เติม s)</div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        const themeColors = {
+            blue: 'text-blue-500 bg-blue-50 border-blue-200',
+            purple: 'text-purple-500 bg-purple-50 border-purple-200',
+            red: 'text-red-500 bg-red-50 border-red-200',
+            orange: 'text-orange-500 bg-orange-50 border-orange-200'
+        };
+
+        // --- NAVIGATION LOGIC ---
+        function openLesson(topicKey) {
+            const data = lessonData[topicKey];
+            const homeScreen = document.getElementById('home-screen');
+            const lessonScreen = document.getElementById('lesson-screen');
+            const backBtn = document.getElementById('back-btn');
+
+            // Set Header for Lesson
+            const headerHtml = `
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 mb-8 text-center relative overflow-hidden flex flex-col items-center">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-4 ${themeColors[data.theme].split(' ').slice(0,2).join(' ')}">
+                        <i class="fas ${data.icon}"></i>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-slate-800 eng-font mb-2">${data.title}</h2>
+                    <p class="text-slate-500 text-lg font-medium">${data.subtitle}</p>
+                </div>
+            `;
+
+            // Inject Content
+            lessonScreen.innerHTML = headerHtml + data.content;
+
+            // Switch Views
+            homeScreen.classList.add('hidden');
+            lessonScreen.classList.remove('hidden');
+            backBtn.classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goHome() {
+            document.getElementById('home-screen').classList.remove('hidden');
+            document.getElementById('lesson-screen').classList.add('hidden');
+            document.getElementById('back-btn').classList.add('hidden');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
